@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemDetailsController">
+    <children>
+        <TableView fx:id="detailsTable" layoutX="30.0" layoutY="115.0" prefHeight="329.0" prefWidth="1141.0">
+            <columns>
+                <TableColumn fx:id="itemCodeColumn" prefWidth="174.0" text="Item Code" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="535.0" text="Description" />
+                <TableColumn fx:id="packSizeColumn" prefWidth="127.0" text="Pack Size" />
+                <TableColumn fx:id="unitPriceColumn" prefWidth="145.0" text="Unit Price" />
+                <TableColumn fx:id="qtyOnHandColumn" minWidth="0.0" prefWidth="159.0" text="Quantity On Hand" />
+            </columns>
+        </TableView>
+        <Label layoutX="33.0" layoutY="21.0" text="Items Details">
+            <font>
+                <Font name="Bell MT" size="32.0" />
+            </font>
+        </Label>
+        <Line endX="1093.5" layoutX="108.0" layoutY="69.0" startX="-108.0" />
+        <Line endX="1101.5" layoutX="101.0" layoutY="476.0" startX="-100.0" />
+        <Label layoutX="33.0" layoutY="516.0" text="Item Code      -">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="itemCodeTextField" layoutX="141.0" layoutY="514.0" />
+        <Label layoutX="33.0" layoutY="562.0" text="Description    -">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="descriptionTextField" layoutX="141.0" layoutY="559.0" prefHeight="25.0" prefWidth="523.0" />
+        <Label layoutX="33.0" layoutY="660.0" prefHeight="20.0" prefWidth="103.0" text="Unit Price       -  ">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="unitPriceTextField" layoutX="141.0" layoutY="658.0" prefHeight="25.0" prefWidth="149.0" />
+        <Label layoutX="33.0" layoutY="703.0" text="QTY On Hand -">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="qtyOnHandTextField" layoutX="141.0" layoutY="701.0" />
+        <Label layoutX="33.0" layoutY="612.0" prefHeight="20.0" prefWidth="103.0" text="Pack Size        - ">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Line endX="617.5" endY="314.79290771484375" layoutX="362.0" layoutY="485.0" startX="617.5" startY="-9.5" />
+        <ButtonBar layoutX="868.0" layoutY="635.0" prefHeight="40.0" prefWidth="200.0" />
+        <Button fx:id="addItemButton" layoutX="1022.0" layoutY="567.0" mnemonicParsing="false" onAction="#onAddItem" prefHeight="25.0" prefWidth="149.0" text="Add New Item" />
+        <Button fx:id="updateItemDetailsButton" layoutX="1022.0" layoutY="623.0" mnemonicParsing="false" onAction="#onUpdateItem" prefHeight="25.0" prefWidth="149.0" text="Update Item Details" />
+        <Button fx:id="deleteItemButtom" layoutX="1022.0" layoutY="679.0" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="149.0" text="Delete Customer" />
+        <Button fx:id="clearIFormButton" layoutX="807.0" layoutY="741.0" mnemonicParsing="false" onAction="#onClearForm" prefHeight="25.0" prefWidth="149.0" text="Clear Details" />
+        <Label fx:id="itemCodeErrorMessage" layoutX="304.0" layoutY="516.0" text="Error Message " textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="descriptionErrorMessage" layoutX="684.0" layoutY="562.0" text="Error Message " textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="qtyOnHandErrorMessage" layoutX="316.0" layoutY="705.0" text="Error Message " textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="unitPriceErrorMessage" layoutX="313.0" layoutY="663.0" text="Error Message " textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="packSizeErrorMessage" layoutX="312.0" layoutY="615.0" text="Error Message " textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+      <TextField fx:id="packSizeTextField" layoutX="141.0" layoutY="613.0" prefHeight="25.0" prefWidth="149.0" />
+    </children>
+</AnchorPane>

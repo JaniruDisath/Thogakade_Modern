@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="customerDetailsButton" layoutX="342.0" layoutY="351.0" mnemonicParsing="false" onAction="#onCustomerButton" prefHeight="98.0" prefWidth="231.0" text="Customer Details" />
+                <Button fx:id="ItemDetailsButton" layoutX="629.0" layoutY="351.0" mnemonicParsing="false" onAction="#onItemDetails" prefHeight="99.0" prefWidth="230.0" text="Item Details" />
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
