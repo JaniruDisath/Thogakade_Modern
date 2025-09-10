@@ -1,5 +1,6 @@
 package controller.customerController;
 
+import controller.db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
@@ -13,8 +14,7 @@ public class CustomerDetailsController implements CustomerDetailsService {
 
         String SQL = "INSERT INTO customer(id, title, name, dob, salary, address, city, province, postalCode) VALUES(?,?,?,?,?,?,?,?,?);";
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
 
             preparedStatement.setObject(1, customer.getId());
             preparedStatement.setObject(2, customer.getTitle());
@@ -38,8 +38,7 @@ public class CustomerDetailsController implements CustomerDetailsService {
         String SQL = "delete from customer where id='" + customerId + "'";
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
 
             preparedStatement.executeUpdate();
 
@@ -55,9 +54,7 @@ public class CustomerDetailsController implements CustomerDetailsService {
                 SET title = ?, name = ?, dob = ?, salary = ?, address = ?, city = ?, province = ?, postalCode = ?
                 WHERE id = ?;
                 """;
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+        try (PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL)) {
 
             preparedStatement.setObject(1, customer.getTitle());
             preparedStatement.setObject(2, customer.getName());
@@ -87,8 +84,7 @@ public class CustomerDetailsController implements CustomerDetailsService {
     public ObservableList<Customer> getAllCustomerDetails() {
         ObservableList<Customer> itemDetails = FXCollections.observableArrayList();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement("Select * FROM customer;");
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM customer;");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

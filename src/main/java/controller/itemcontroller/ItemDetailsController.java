@@ -1,5 +1,6 @@
 package controller.itemcontroller;
 
+import controller.db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Item;
@@ -12,8 +13,7 @@ public class ItemDetailsController implements ItemDetailsService {
     public void addItemDetails(Item item) {
         String SQL = "INSERT INTO item(itemCode, description, packSize, unitPrice, qtyOnHand) VALUES(?,?,?,?,?);";
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
 
             preparedStatement.setObject(1, item.getItemCode());
             preparedStatement.setObject(2, item.getDescription());
@@ -32,8 +32,7 @@ public class ItemDetailsController implements ItemDetailsService {
     public void deleteItemDetails(String itemId) {
         String SQL = "delete from item where itemCode='" + itemId + "'";
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
 
             preparedStatement.executeUpdate();
 
@@ -50,9 +49,7 @@ public class ItemDetailsController implements ItemDetailsService {
                 WHERE itemCode = ?;
                 """;
 
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+        try (PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL)) {
 
             preparedStatement.setObject(1, item.getDescription());
             preparedStatement.setObject(2, item.getPackSize());
@@ -75,8 +72,7 @@ public class ItemDetailsController implements ItemDetailsService {
     public ObservableList<Item> getAllCustomerDetails() {
         ObservableList<Item> itemDetails = FXCollections.observableArrayList();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement("Select * FROM item;");
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM item;");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
