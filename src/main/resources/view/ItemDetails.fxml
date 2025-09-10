@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemDetailsController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.itemcontroller.ItemDetailsFormController">
     <children>
         <TableView fx:id="detailsTable" layoutX="30.0" layoutY="115.0" prefHeight="329.0" prefWidth="1141.0">
             <columns>
@@ -61,7 +61,7 @@
         <ButtonBar layoutX="868.0" layoutY="635.0" prefHeight="40.0" prefWidth="200.0" />
         <Button fx:id="addItemButton" layoutX="1022.0" layoutY="567.0" mnemonicParsing="false" onAction="#onAddItem" prefHeight="25.0" prefWidth="149.0" text="Add New Item" />
         <Button fx:id="updateItemDetailsButton" layoutX="1022.0" layoutY="623.0" mnemonicParsing="false" onAction="#onUpdateItem" prefHeight="25.0" prefWidth="149.0" text="Update Item Details" />
-        <Button fx:id="deleteItemButtom" layoutX="1022.0" layoutY="679.0" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="149.0" text="Delete Customer" />
+        <Button fx:id="deleteItemButton" layoutX="1022.0" layoutY="679.0" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="149.0" text="Delete Customer" />
         <Button fx:id="clearIFormButton" layoutX="807.0" layoutY="741.0" mnemonicParsing="false" onAction="#onClearForm" prefHeight="25.0" prefWidth="149.0" text="Clear Details" />
         <Label fx:id="itemCodeErrorMessage" layoutX="304.0" layoutY="516.0" text="Error Message " textFill="RED">
             <font>

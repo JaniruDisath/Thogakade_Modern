@@ -1,4 +1,4 @@
-package controller;
+package controller.customerController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,28 +10,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
-public class CustomerDetailsController implements Initializable {
+public class CustomerDetailsFormController implements Initializable {
 
 
-    @FXML
-    private Button addCustomerButton;
-
-    @FXML
-    private TableColumn<?, ?> addressColumn;
-
-    @FXML
-    private TableColumn<?, ?> cityColumn;
-
-
-    @FXML
-    private Button clearIFormButton;
-
-
-    @FXML
-    private Button deleteCustomerButtom;
+    //Buttons
+//    @FXML
+//    private Button addCustomerButton;
+//
+//    @FXML
+//    private Button clearIFormButton;
+//
+//    @FXML
+//    private Button deleteCustomerButton;
+//
+//    @FXML
+//    private Button updateCustomerDetailsButton;
 
     //Table and Columns
 
@@ -40,7 +35,6 @@ public class CustomerDetailsController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> customerIDColumn;
-
 
     @FXML
     private TableColumn<?, ?> dobColumn;
@@ -61,7 +55,11 @@ public class CustomerDetailsController implements Initializable {
     private TableColumn<?, ?> titleColumn;
 
     @FXML
-    private Button updateCustomerDetailsButton;
+    private TableColumn<?, ?> addressColumn;
+
+    @FXML
+    private TableColumn<?, ?> cityColumn;
+
 
     //Error Messages
     @FXML
@@ -120,9 +118,11 @@ public class CustomerDetailsController implements Initializable {
     @FXML
     private TextField postalCodeTextField;
 
+    private final CustomerDetailsService service  = new CustomerDetailsController();
+
 
     @FXML
-    void onAddCustomer(ActionEvent event) {
+    void onAddCustomer() {
         addCustomerDetails(new Customer(
                 customerIDTextField.getText(),
                 titleComboBox.getValue(),
@@ -137,19 +137,18 @@ public class CustomerDetailsController implements Initializable {
     }
 
     @FXML
-    void onClearForm(ActionEvent event) {
+    void onClearForm() {
         clearErrorMessages();
         clearTextFields();
     }
 
     @FXML
-    void onDeleteCustomer(ActionEvent event) {
+    void onDeleteCustomer() {
         deleteCustomerDetails(customerIDTextField.getText());
-
     }
 
     @FXML
-    void onUpdateCustomer(ActionEvent event) {
+    void onUpdateCustomer() {
         updateCustomerDetails(new Customer(
                 customerIDTextField.getText(),
                 titleComboBox.getValue(),
@@ -168,19 +167,12 @@ public class CustomerDetailsController implements Initializable {
         clearErrorMessages();
         setTitleComboBoxElements();
         setProvinceComboBoxElements();
-
         setCellValueFactory();
         setDetailsTable();
-
         getValuesOnTableRowClick();
-
-
     }
 
-    private void setDetailsTable() {
-        detailsTable.setItems(getAllCustomerDetails());
-    }
-
+    //Clean UI
     private void clearErrorMessages() {
         customerIDErrorMessage.setText("");
         titleErrorMessage.setText("");
@@ -203,7 +195,10 @@ public class CustomerDetailsController implements Initializable {
         cityTextField.setText("");
         provinceComboBox.getSelectionModel().clearSelection();
         postalCodeTextField.setText("");
+        detailsTable.getSelectionModel().clearSelection();
     }
+
+    //Combo Box Values
 
     private void setTitleComboBoxElements() {
         ObservableList<String> titles = FXCollections.observableArrayList(
@@ -227,6 +222,7 @@ public class CustomerDetailsController implements Initializable {
         provinceComboBox.setItems(provinces);
     }
 
+    //Setting ID to identify to set values on each column
     private void setCellValueFactory() {
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -242,113 +238,37 @@ public class CustomerDetailsController implements Initializable {
 
     //Database Functions
 
+    private void setDetailsTable() {
+        detailsTable.setItems(getAllCustomerDetails());
+    }
+
     public ObservableList<Customer> getAllCustomerDetails() {
-        ObservableList<Customer> itemDetails = FXCollections.observableArrayList();
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement("Select * FROM customer;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                itemDetails.add(new Customer(
-                                resultSet.getString("id"),
-                                resultSet.getString("title"),
-                                resultSet.getString("name"),
-                                resultSet.getDate("dob").toLocalDate(),
-                                resultSet.getDouble("salary"),
-                                resultSet.getString("address"),
-                                resultSet.getString("city"),
-                                resultSet.getString("province"),
-                                resultSet.getString("postalCode")
-                        )
-                );
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return itemDetails;
+        return service.getAllCustomerDetails();
     }
 
     public void addCustomerDetails(Customer customer) {
-
-        String SQL = "INSERT INTO customer(id, title, name, dob, salary, address, city, province, postalCode) VALUES(?,?,?,?,?,?,?,?,?);";
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.setObject(1, customer.getId());
-            preparedStatement.setObject(2, customer.getTitle());
-            preparedStatement.setObject(3, customer.getName());
-            preparedStatement.setObject(4, customer.getDob());
-            preparedStatement.setObject(5, customer.getSalary());
-            preparedStatement.setObject(6, customer.getAddress());
-            preparedStatement.setObject(7, customer.getCity());
-            preparedStatement.setObject(8, customer.getProvince());
-            preparedStatement.setObject(9, customer.getPostalCode());
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        service.addCustomerDetails(customer);
         setDetailsTable();
+        clearErrorMessages();
+        clearTextFields();
     }
 
     public void deleteCustomerDetails(String customerId) {
-        String SQL = "delete from customer where id='" + customerId + "'";
-
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        service.deleteCustomerDetails(customerId);
         setDetailsTable();
+        clearErrorMessages();
+        clearTextFields();
     }
 
     public void updateCustomerDetails(Customer customer) {
-        String SQL = """
-                UPDATE customer
-                SET title = ?, name = ?, dob = ?, salary = ?, address = ?, city = ?, province = ?, postalCode = ?
-                WHERE id = ?;
-                """;
-
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/thogakade_modern", "root", "1234");
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-
-            preparedStatement.setObject(1, customer.getTitle());
-            preparedStatement.setObject(2, customer.getName());
-            preparedStatement.setObject(3, customer.getDob());   // LocalDate will auto-map if using MySQL 8+ driver
-            preparedStatement.setObject(4, customer.getSalary());
-            preparedStatement.setObject(5, customer.getAddress());
-            preparedStatement.setObject(6, customer.getCity());
-            preparedStatement.setObject(7, customer.getProvince());
-            preparedStatement.setObject(8, customer.getPostalCode());
-            preparedStatement.setObject(9, customer.getId());    // WHERE clause
-
-            int rowsUpdated = preparedStatement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Customer updated successfully!");
-            } else {
-                System.out.println("No customer found with id: " + customer.getId());
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        setDetailsTable(); // refresh your TableView
+        service.updateCustomerDetails(customer);
+        setDetailsTable();
+        clearErrorMessages();
+        clearTextFields();
     }
 
-
-
+    //Get Values From Table When the table row is selected
     private void getValuesOnTableRowClick() {
-
         detailsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->
                 {
                     if (newValue != null) {

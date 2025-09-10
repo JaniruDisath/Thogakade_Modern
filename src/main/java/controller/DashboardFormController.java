@@ -13,7 +13,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class DashboardController implements Initializable {
+public class DashboardFormController implements Initializable {
 
     private Stage customerDetails = new Stage();
     private Stage itemDetails = new Stage();
