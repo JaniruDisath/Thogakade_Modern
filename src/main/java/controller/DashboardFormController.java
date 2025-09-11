@@ -5,9 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,10 +23,57 @@ public class DashboardFormController implements Initializable {
     private Stage itemDetails = new Stage();
 
     @FXML
-    private Button customerDetailsButton;
+    private HBox dashboardElement;
 
     @FXML
-    private Button itemDetailsButton;
+    private HBox orderElement;
+
+    @FXML
+    private HBox inventoryElement;
+
+    @FXML
+    private HBox customerElement;
+
+    //On Mouse Click Listeners
+
+    @FXML
+    void onDashboardElementClicked(MouseEvent event) {
+
+        System.out.println("Working");
+    }
+
+    @FXML
+    void onOrderElementClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onInventoryElementClicked(MouseEvent event) {
+        loadUI("/view/ItemDetails.fxml");
+    }
+
+    @FXML
+    void onCustomersElementClicked(MouseEvent event) {
+        loadUI("/view/CustomerDetails.fxml");
+    }
+
+
+
+
+
+
+    @FXML
+    private StackPane contentArea;
+
+    private void loadUI(String fxml) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            contentArea.getChildren().setAll(root); // replace everything in contentArea
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     void onCustomerButton(ActionEvent event) {
@@ -50,7 +101,10 @@ public class DashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new DbChecker().initializeDatabase();
+        System.out.println("Working Initializable");
+
     }
+
 
 
 }

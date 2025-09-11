@@ -1,0 +1,14 @@
+.white-background{
+    -fx-background-color: #fff;
+}
+
+//Hover Effect
+.menu-element {
+    -fx-cursor: hand;
+}
+.menu-element:hover {
+    -fx-background-color: #e0e0e0;
+}
+.menu-element:pressed {
+    -fx-background-color: #cccccc;
+}
