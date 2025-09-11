@@ -1,4 +1,4 @@
-package controller.util;
+package util;
 
 public class SqlScripts {
 

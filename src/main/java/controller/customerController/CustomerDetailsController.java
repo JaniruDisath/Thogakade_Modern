@@ -1,6 +1,6 @@
 package controller.customerController;
 
-import controller.db.DBConnection;
+import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;

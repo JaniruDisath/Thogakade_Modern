@@ -1,5 +1,7 @@
-package controller.util;
+package util;
 
+
+import db.DbLogin;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +16,7 @@ public class DbConfig {
             if (input != null) {
                 props.load(input);
             } else {
-                throw new RuntimeException("db.properties not found");
+                DbLogin.askForCredentials();
             }
         } catch (IOException e) {
             e.printStackTrace();
