@@ -38,8 +38,7 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void onDashboardElementClicked(MouseEvent event) {
-
-        System.out.println("Working");
+        loadUI("/view/PlaceOrder.fxml");
     }
 
     @FXML
@@ -101,8 +100,7 @@ public class DashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new DbChecker().initializeDatabase();
-        System.out.println("Working Initializable");
-
+        loadUI("/view/PlaceOrder.fxml");
     }
 
 

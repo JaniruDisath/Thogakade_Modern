@@ -132,7 +132,7 @@
             </HBox>
          </children>
       </VBox>
-      <StackPane fx:id="contentArea" layoutX="304.0" layoutY="70.0" prefHeight="733.0" prefWidth="896.0" />
+      <StackPane fx:id="contentArea" layoutX="225.0" layoutY="70.0" maxHeight="733.0" maxWidth="974.0" minHeight="733.0" minWidth="974.0" prefHeight="733.0" prefWidth="974.0" />
       <Separator layoutX="-7.0" layoutY="69.0" prefHeight="0.0" prefWidth="1206.0" />
       <Separator disable="true" halignment="LEFT" layoutX="222.0" layoutY="-3.0" opacity="0.75" orientation="VERTICAL" prefHeight="807.0" prefWidth="0.0" />
    </children>
