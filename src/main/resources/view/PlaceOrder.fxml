@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="733.0" maxWidth="974.0" minHeight="733.0" minWidth="974.0" prefHeight="733.0" prefWidth="974.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.placeOrderController.PlaceOrderFormController">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="871.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.placeOrderController.formController.PlaceOrderFormController">
    <children>
       <VBox prefHeight="733.0" prefWidth="633.0" HBox.hgrow="ALWAYS">
          <children>
@@ -21,11 +21,19 @@
                   <Insets left="50.0" />
                </padding>
             </Label>
-            <Separator prefWidth="200.0" />
-            <VBox fx:id="itemsVBox" prefHeight="543.0" prefWidth="615.0" VBox.vgrow="ALWAYS">
+            <Separator prefWidth="200.0" stylesheets="@../css/style.css" />
+            <ScrollPane prefHeight="500.0" prefWidth="632.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="itemsVBox" prefHeight="646.0" prefWidth="1187.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="22.0" />
-               </VBox.margin></VBox>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </ScrollPane>
          </children>
       </VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
@@ -36,9 +44,9 @@
                   <Font name="SansSerif Bold" size="24.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="536.0" prefWidth="316.0">
+            <ScrollPane prefHeight="666.0" prefWidth="316.0">
                <content>
-                  <VBox fx:id="orderVBox" prefHeight="534.0" prefWidth="314.0" />
+                  <VBox fx:id="orderVBox" alignment="TOP_CENTER" focusTraversable="true" prefHeight="662.0" prefWidth="314.0" spacing="10.0" />
                </content>
             </ScrollPane>
             <HBox prefHeight="60.0" prefWidth="316.0">

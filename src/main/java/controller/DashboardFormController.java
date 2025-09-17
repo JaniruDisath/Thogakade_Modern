@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 public class DashboardFormController implements Initializable {
 
     private Stage customerDetails = new Stage();
-    private Stage itemDetails = new Stage();
+
 
     @FXML
     private HBox dashboardElement;
@@ -33,6 +34,8 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     private HBox customerElement;
+
+
 
     //On Mouse Click Listeners
 
@@ -57,10 +60,6 @@ public class DashboardFormController implements Initializable {
     }
 
 
-
-
-
-
     @FXML
     private StackPane contentArea;
 
@@ -73,34 +72,11 @@ public class DashboardFormController implements Initializable {
         }
     }
 
-
-    @FXML
-    void onCustomerButton(ActionEvent event) {
-        try {
-            customerDetails.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerDetails.fxml"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        customerDetails.setResizable(false);
-        customerDetails.show();
-    }
-
-    @FXML
-    void onItemDetails(ActionEvent event) {
-        try {
-            itemDetails.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemDetails.fxml"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        itemDetails.setResizable(false);
-        itemDetails.show();
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new DbChecker().initializeDatabase();
         loadUI("/view/PlaceOrder.fxml");
+
     }
 
 

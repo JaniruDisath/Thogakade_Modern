@@ -13,4 +13,5 @@ public class Item {
     private String packSize;
     private Double unitPrice;
     private  Integer qtyOnHand;
+    private  String itemImage;
 }

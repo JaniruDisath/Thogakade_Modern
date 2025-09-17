@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="291.0" styleClass="border-thin-rectangular" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewElementsController.cartOrderController.CartOrderFormController">
+   <children>
+      <HBox prefHeight="20.0" prefWidth="314.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="titleLabel" prefHeight="24.0" prefWidth="302.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER" maxWidth="316.0" prefHeight="39.0" prefWidth="312.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="priceLabel" prefHeight="29.0" prefWidth="102.0" text="Label">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Label>
+            <Button fx:id="decreaseOrder1" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="71.0" text="Remove" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="39.0" prefWidth="135.0">
+               <children>
+                  <Button fx:id="decreaseOrder" mnemonicParsing="false" onAction="#onDecrease" prefHeight="25.0" prefWidth="25.0" text="-" />
+                  <TextField fx:id="numberOfUnitsTextField" editable="false" maxWidth="50.0" minHeight="14.0" minWidth="50.0" prefHeight="20.0" prefWidth="50.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="increaseOrder" mnemonicParsing="false" onAction="#onIncrease" prefHeight="25.0" prefWidth="25.0" text="+" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

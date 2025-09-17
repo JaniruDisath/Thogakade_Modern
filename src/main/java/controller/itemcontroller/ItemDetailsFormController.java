@@ -90,7 +90,8 @@ public class ItemDetailsFormController implements Initializable {
                         descriptionTextField.getText(),
                         packSizeTextField.getText(),
                         Double.parseDouble(unitPriceTextField.getText()),
-                        Integer.parseInt(qtyOnHandTextField.getText())
+                        Integer.parseInt(qtyOnHandTextField.getText()),
+                        "itemImage"
 
                 )
         );
@@ -117,7 +118,8 @@ public class ItemDetailsFormController implements Initializable {
                         descriptionTextField.getText(),
                         packSizeTextField.getText(),
                         Double.parseDouble(unitPriceTextField.getText()),
-                        Integer.parseInt(qtyOnHandTextField.getText())
+                        Integer.parseInt(qtyOnHandTextField.getText()),
+                        "itemImage"
 
                 )
         );

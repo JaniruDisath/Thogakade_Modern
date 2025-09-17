@@ -81,7 +81,8 @@ public class ItemDetailsController implements ItemDetailsService {
                                 resultSet.getString("description"),
                                 resultSet.getString("packSize"),
                                 resultSet.getDouble("unitPrice"),
-                                resultSet.getInt("qtyOnHand")
+                                resultSet.getInt("qtyOnHand"),
+                        resultSet.getString("itemImage")
                         )
                 );
             }

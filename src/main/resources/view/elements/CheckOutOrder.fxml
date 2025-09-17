@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.SearchableComboBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.checkOutOrderController.formController.CheckOutOrderFormFormController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="60.0" prefWidth="572.0" text="Check Out" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="SansSerif Regular" size="24.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <VBox prefHeight="84.0" prefWidth="580.0">
+               <children>
+                  <HBox prefHeight="64.0" prefWidth="580.0">
+                     <children>
+                        <Label prefHeight="66.0" prefWidth="158.0" text="Cust ID">
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <SearchableComboBox fx:id="customerIDComboBox" prefHeight="64.0" prefWidth="592.0" promptText="Search Customer ID">
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="10.0" right="30.0" top="15.0" />
+                           </HBox.margin>
+                        </SearchableComboBox>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="70.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onPlaceOrder" prefHeight="49.0" prefWidth="222.0" text="Place Order">
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <VBox prefHeight="650.0" prefWidth="378.0">
+         <children>
+            <VBox prefHeight="686.0" prefWidth="316.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="132.0" prefWidth="378.0" text="Cart" textAlignment="CENTER">
+                     <font>
+                        <Font name="SansSerif Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane prefHeight="569.0" prefWidth="358.0">
+                     <content>
+                        <VBox fx:id="orderVBox" alignment="TOP_CENTER" focusTraversable="true" prefHeight="503.0" prefWidth="356.0" spacing="10.0" />
+                     </content>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+                  <VBox alignment="TOP_CENTER" prefHeight="140.0" prefWidth="378.0" spacing="5.0">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <HBox prefHeight="75.0" prefWidth="378.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="89.0" prefWidth="98.0" text="Total" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="79.0" prefWidth="265.0" text="5000.00">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

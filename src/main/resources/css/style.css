@@ -2,6 +2,10 @@
     -fx-background-color: #fff;
 }
 
+.blue-background{
+    -fx-background-color: #0000FF;
+}
+
 //Hover Effect
 .menu-element {
     -fx-cursor: hand;
@@ -20,4 +24,25 @@
     -fx-border-color: black;
     -fx-border-width: 2;
     -fx-border-radius: 5;
+}
+
+.border-thin-rectangular{
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}
+
+.bottom-border{
+          -fx-border-width: 0 0 2 0;
+           -fx-border-color: transparent transparent black transparent;
+           -fx-border-style: solid;
+           -fx-border-radius: 0;
+           -fx-padding: 6;
+}
+
+.right-border{
+           -fx-border-width: 0 2 0 0;
+              -fx-border-color: transparent black transparent transparent;
+              -fx-border-style: solid;
+              -fx-border-radius: 0;
+              -fx-padding: 6;
 }
