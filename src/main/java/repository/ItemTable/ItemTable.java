@@ -1,16 +1,49 @@
-package controller.pages.itemcontroller;
+package repository.ItemTable;
 
 import db.DBConnection;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.Item;
+import repository.Thogakade_Modern;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ItemDetailsController implements ItemDetailsService {
+public class ItemTable implements Thogakade_Modern<Item> {
 
     @Override
-    public void addItemDetails(Item item) {
+    public List<Item> getAllData() {
+        List<Item> itemDetails = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM item;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                itemDetails.add(new Item(
+                                resultSet.getString("itemCode"),
+                                resultSet.getString("description"),
+                                resultSet.getString("packSize"),
+                                resultSet.getDouble("unitPrice"),
+                                resultSet.getInt("qtyOnHand"),
+                                resultSet.getString("itemImage")
+                        )
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return itemDetails;
+    }
+
+    @Override
+    public List<String> getListOfPrimaryKeys() {
+        return List.of();
+    }
+
+    //Insert An Item
+    @Override
+    public void insertAnItem(Item item) {
         String SQL = "INSERT INTO item(itemCode, description, packSize, unitPrice, qtyOnHand) VALUES(?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
@@ -28,9 +61,10 @@ public class ItemDetailsController implements ItemDetailsService {
         }
     }
 
+    //Delete An Item
     @Override
-    public void deleteItemDetails(String itemId) {
-        String SQL = "delete from item where itemCode='" + itemId + "'";
+    public void deleteAnItem(String primaryID) {
+        String SQL = "delete from item where itemCode='" + primaryID + "'";
         try {
             PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
 
@@ -41,8 +75,9 @@ public class ItemDetailsController implements ItemDetailsService {
         }
     }
 
+    //Update An Item
     @Override
-    public void updateItemDetails(Item item) {
+    public void updateAnItem(Item item) {
         String SQL = """
                 UPDATE item
                 SET  description = ?, packSize = ?, unitPrice = ?, qtyOnHand = ?
@@ -68,30 +103,4 @@ public class ItemDetailsController implements ItemDetailsService {
             throw new RuntimeException(e);
         }
     }
-
-    public ObservableList<Item> getAllCustomerDetails() {
-        ObservableList<Item> itemDetails = FXCollections.observableArrayList();
-        try {
-            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM item;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                itemDetails.add(new Item(
-                                resultSet.getString("itemCode"),
-                                resultSet.getString("description"),
-                                resultSet.getString("packSize"),
-                                resultSet.getDouble("unitPrice"),
-                                resultSet.getInt("qtyOnHand"),
-                        resultSet.getString("itemImage")
-                        )
-                );
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return itemDetails;
-    }
-
-
 }

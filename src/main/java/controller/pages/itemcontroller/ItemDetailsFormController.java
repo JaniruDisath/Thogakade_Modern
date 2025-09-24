@@ -1,6 +1,7 @@
 package controller.pages.itemcontroller;
 
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Item;
+import repository.ItemTable.ItemTable;
+import repository.Thogakade_Modern;
 
 import java.net.URL;
 
@@ -80,7 +83,7 @@ public class ItemDetailsFormController implements Initializable {
     @FXML
     private Label qtyOnHandErrorMessage;
 
-    private final ItemDetailsService service = new ItemDetailsController();
+    private Thogakade_Modern<Item> thogakade_modern = new ItemTable();
 
     @FXML
     void onAddItem() {
@@ -92,7 +95,6 @@ public class ItemDetailsFormController implements Initializable {
                         Double.parseDouble(unitPriceTextField.getText()),
                         Integer.parseInt(qtyOnHandTextField.getText()),
                         "itemImage"
-
                 )
         );
         clearForm();
@@ -186,22 +188,22 @@ public class ItemDetailsFormController implements Initializable {
     }
 
     public ObservableList<Item> getAllCustomerDetails() {
-        return service.getAllCustomerDetails();
+        return FXCollections.observableArrayList(thogakade_modern.getAllData());
     }
 
     public void addItemDetails(Item item) {
-        service.addItemDetails(item);
+        thogakade_modern.insertAnItem(item);
         setDetailsTable();
     }
 
 
     public void deleteItemDetails(String itemId) {
-        service.deleteItemDetails(itemId);
+        thogakade_modern.deleteAnItem(itemId);
         setDetailsTable();
     }
 
     public void updateItemDetails(Item item) {
-        service.updateItemDetails(item);
+        thogakade_modern.updateAnItem(item);
         setDetailsTable();
     }
 

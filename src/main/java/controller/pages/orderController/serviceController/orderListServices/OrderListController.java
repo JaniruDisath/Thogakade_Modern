@@ -2,15 +2,13 @@ package controller.pages.orderController.serviceController.orderListServices;
 
 import controller.pages.orderController.serviceController.OrderControllerService;
 import controller.viewElementsController.orderCardController.OrderCardFormControllerService;
-import db.DBConnection;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import model.Orders;
+import repository.OrdersTable.OrdersTable;
+import repository.Thogakade_Modern;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,23 +50,8 @@ public class OrderListController implements OrderListControllerService {
     }
 
     private List<Orders> getAllOrderData() {
-        List<Orders> itemDetails = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM orders;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                itemDetails.add(new Orders(
-                                resultSet.getString("orderID"),
-                                resultSet.getDate("orderDate").toLocalDate(),
-                                resultSet.getString("custID")
-                        )
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return itemDetails;
+        Thogakade_Modern<Orders> thogakade_modern = new OrdersTable();
+        return thogakade_modern.getAllData();
     }
 
 }

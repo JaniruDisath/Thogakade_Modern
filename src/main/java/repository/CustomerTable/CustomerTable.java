@@ -1,17 +1,65 @@
-package controller.pages.customerController;
+package repository.CustomerTable;
 
 import db.DBConnection;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.Customer;
+import repository.Thogakade_Modern;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CustomerDetailsController implements CustomerDetailsService {
+public class CustomerTable implements Thogakade_Modern<Customer> {
 
     @Override
-    public void addCustomerDetails(Customer customer) {
+    public List<Customer> getAllData() {
+        List<Customer> itemDetails = FXCollections.observableArrayList();
+        try {
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM customer;");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()) {
+                itemDetails.add(new Customer(
+                                resultSet.getString("id"),
+                                resultSet.getString("title"),
+                                resultSet.getString("name"),
+                                resultSet.getDate("dob").toLocalDate(),
+                                resultSet.getDouble("salary"),
+                                resultSet.getString("address"),
+                                resultSet.getString("city"),
+                                resultSet.getString("province"),
+                                resultSet.getString("postalCode")
+                        )
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return itemDetails;
+    }
+
+    @Override
+    public List<String> getListOfPrimaryKeys() {
+        List<String> customerIDList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM customer;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                customerIDList.add(resultSet.getString("id"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return customerIDList;
+    }
+
+    //Insert An Item
+    @Override
+    public void insertAnItem(Customer customer) {
         String SQL = "INSERT INTO customer(id, title, name, dob, salary, address, city, province, postalCode) VALUES(?,?,?,?,?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
@@ -33,9 +81,11 @@ public class CustomerDetailsController implements CustomerDetailsService {
         }
     }
 
+
+    //Delete An Item
     @Override
-    public void deleteCustomerDetails(String customerId) {
-        String SQL = "delete from customer where id='" + customerId + "'";
+    public void deleteAnItem(String primaryID) {
+        String SQL = "delete from customer where id='" + primaryID + "'";
 
         try {
             PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(SQL);
@@ -47,8 +97,9 @@ public class CustomerDetailsController implements CustomerDetailsService {
         }
     }
 
+    //Update An Item
     @Override
-    public void updateCustomerDetails(Customer customer) {
+    public void updateAnItem(Customer customer) {
         String SQL = """
                 UPDATE customer
                 SET title = ?, name = ?, dob = ?, salary = ?, address = ?, city = ?, province = ?, postalCode = ?
@@ -77,35 +128,5 @@ public class CustomerDetailsController implements CustomerDetailsService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-    @Override
-    public ObservableList<Customer> getAllCustomerDetails() {
-        ObservableList<Customer> itemDetails = FXCollections.observableArrayList();
-        try {
-            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM customer;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                itemDetails.add(new Customer(
-                                resultSet.getString("id"),
-                                resultSet.getString("title"),
-                                resultSet.getString("name"),
-                                resultSet.getDate("dob").toLocalDate(),
-                                resultSet.getDouble("salary"),
-                                resultSet.getString("address"),
-                                resultSet.getString("city"),
-                                resultSet.getString("province"),
-                                resultSet.getString("postalCode")
-                        )
-                );
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return itemDetails;
-    }
-
 }

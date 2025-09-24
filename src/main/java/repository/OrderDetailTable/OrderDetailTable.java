@@ -1,7 +1,8 @@
-package controller.pages.orderController.serviceController.orderDetailsListServices;
+package repository.OrderDetailTable;
 
 import db.DBConnection;
 import model.OrderDetails;
+import repository.Thogakade_Modern;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,14 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailsListController implements OrderDetailsListControllerService {
+public class OrderDetailTable implements Thogakade_Modern<OrderDetails> {
 
     @Override
-    public List<OrderDetails> getOrderDetailsList() {
-        return getAllOrderDetailsData();
-    }
-
-    private List<OrderDetails> getAllOrderDetailsData() {
+    public List<OrderDetails> getAllData() {
         List<OrderDetails> itemDetails = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM orderdetail");
@@ -37,5 +34,27 @@ public class OrderDetailsListController implements OrderDetailsListControllerSer
         return itemDetails;
     }
 
+    @Override
+    public List<String> getListOfPrimaryKeys() {
+        return List.of();
+    }
 
+    //Insert An Item
+    @Override
+    public void insertAnItem(OrderDetails orderDetails) {
+
+    }
+
+
+    //Delete An Item
+    @Override
+    public void deleteAnItem(String primaryID) {
+
+    }
+
+    //Update An Item
+    @Override
+    public void updateAnItem(OrderDetails orderDetails) {
+
+    }
 }

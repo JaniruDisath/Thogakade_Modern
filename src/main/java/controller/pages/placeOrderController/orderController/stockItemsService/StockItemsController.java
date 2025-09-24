@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import model.Item;
+import repository.ItemTable.ItemTable;
+import repository.Thogakade_Modern;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -26,7 +28,7 @@ public class StockItemsController implements StockItemsControllerService {
 
     //Items Row
     private HBox currentRow;
-    //All the itesm finalized
+    //All the items finalized
     private List<HBox> finalColumn = new ArrayList<>();
     //Card Counter
     private int cardCount = 0;
@@ -78,28 +80,8 @@ public class StockItemsController implements StockItemsControllerService {
 
     //Getting data from the Database
     public List<Item> getAllCustomerDetails() {
-        List<Item> itemDetails = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement("Select * FROM item;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                itemDetails.add(new Item(
-                                resultSet.getString("itemCode"),
-                                resultSet.getString("description"),
-                                resultSet.getString("packSize"),
-                                resultSet.getDouble("unitPrice"),
-                                resultSet.getInt("qtyOnHand"),
-                                resultSet.getString("itemImage")
-                        )
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-
-        }
-        return itemDetails;
+        Thogakade_Modern<Item> thogakade_modern = new ItemTable();
+        return thogakade_modern.getAllData();
     }
 
     @Override

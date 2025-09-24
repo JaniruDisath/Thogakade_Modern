@@ -2,8 +2,6 @@ package controller.windows.checkOutOrderController.formController;
 
 import controller.windows.checkOutOrderController.checkOutOrderController.CheckOutOrderControllerServices;
 import controller.windows.checkOutOrderController.checkOutOrderController.CheckoutOrderController;
-import controller.pages.customerController.services.CustomerController;
-import controller.pages.customerController.services.CustomerServices;
 import controller.pages.placeOrderController.formController.PlaceOrderFormControllerService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +10,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Customer;
 import model.dto.cart.CartItems;
 import model.dto.cart.CartListVBox;
 import org.controlsfx.control.SearchableComboBox;
+import repository.CustomerTable.CustomerTable;
+import repository.Thogakade_Modern;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,8 +82,8 @@ public class CheckOutOrderFormFormController implements CheckOutOrderFormControl
     }
 
     private void loadComboBox(){
-        CustomerServices customerServices = new CustomerController();
-        customerIDComboBox.getItems().addAll(customerServices.getCustomerIds());
+        Thogakade_Modern<Customer> thogakade_modern = new CustomerTable();
+        customerIDComboBox.getItems().addAll(thogakade_modern.getListOfPrimaryKeys());
     }
 
     public void setCartListElement(){

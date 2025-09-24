@@ -1,18 +1,17 @@
 package controller.pages.orderController.serviceController;
 
 import controller.pages.orderController.formController.OrderFormControllerService;
-import controller.pages.orderController.serviceController.orderDetailsListServices.OrderDetailsListController;
-import controller.pages.orderController.serviceController.orderDetailsListServices.OrderDetailsListControllerService;
 import controller.pages.orderController.serviceController.orderListServices.OrderListController;
 import controller.pages.orderController.serviceController.orderListServices.OrderListControllerService;
-import controller.pages.orderController.serviceController.stockItemsListService.StockItemsListController;
-import controller.pages.orderController.serviceController.stockItemsListService.StockItemsListInterface;
 import controller.pages.placeOrderController.orderController.basketItemService.BasketItemController;
 import controller.pages.placeOrderController.orderController.basketItemService.BasketItemControllerService;
 import javafx.scene.layout.HBox;
 import model.Item;
 import model.OrderDetails;
 import model.dto.cart.CartListVBox;
+import repository.ItemTable.ItemTable;
+import repository.OrderDetailTable.OrderDetailTable;
+import repository.Thogakade_Modern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +26,7 @@ public class OrderController implements OrderControllerService {
     }
 
     private OrderListControllerService orderListControllerService = new OrderListController(this);
-    private OrderDetailsListControllerService orderDetailsListControllerService = new OrderDetailsListController();
     private BasketItemControllerService basketItemControllerService = new BasketItemController();
-    private StockItemsListInterface stockItemsListInterface = new StockItemsListController();
 
     @Override
     public List<HBox> getOrderCardList() {
@@ -39,7 +36,8 @@ public class OrderController implements OrderControllerService {
     @Override
     public void setOrderDetailsListUI(String orderID) {
         basketItemControllerService.resetList();
-        List<OrderDetails> orderDetailsList = orderDetailsListControllerService.getOrderDetailsList();
+        Thogakade_Modern<OrderDetails> thogakade_modern = new OrderDetailTable();
+        List<OrderDetails> orderDetailsList = thogakade_modern.getAllData();
         List<OrderDetails> selectedOrders = new ArrayList<>();
         for (int i = 0; i < orderDetailsList.size(); i++) {
             if (Objects.equals(orderID, orderDetailsList.get(i).getOrderID())) {
@@ -66,7 +64,8 @@ public class OrderController implements OrderControllerService {
     }
 
     private Item findItem(String itemCode) {
-        List<Item> itemList = stockItemsListInterface.getItemsList();
+        Thogakade_Modern<Item> thogakade_modern = new ItemTable();
+        List<Item> itemList = thogakade_modern.getAllData();
         for (int i = 0; i < itemList.size(); i++) {
             if (Objects.equals(itemCode, itemList.get(i).getItemCode())) {
                 return itemList.get(i);

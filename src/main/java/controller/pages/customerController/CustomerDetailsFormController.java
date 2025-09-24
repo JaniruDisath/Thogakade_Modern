@@ -7,27 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
+import repository.CustomerTable.CustomerTable;
+import repository.Thogakade_Modern;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CustomerDetailsFormController implements Initializable {
-
-
-    //Buttons
-//    @FXML
-//    private Button addCustomerButton;
-//
-//    @FXML
-//    private Button clearIFormButton;
-//
-//    @FXML
-//    private Button deleteCustomerButton;
-//
-//    @FXML
-//    private Button updateCustomerDetailsButton;
-
-    //Table and Columns
 
     @FXML
     private TableView<Customer> detailsTable;
@@ -117,8 +103,8 @@ public class CustomerDetailsFormController implements Initializable {
     @FXML
     private TextField postalCodeTextField;
 
-    private final CustomerDetailsService service  = new CustomerDetailsController();
 
+    private Thogakade_Modern<Customer> thogakade_modern = new CustomerTable();
 
     @FXML
     void onAddCustomer() {
@@ -242,25 +228,25 @@ public class CustomerDetailsFormController implements Initializable {
     }
 
     public ObservableList<Customer> getAllCustomerDetails() {
-        return service.getAllCustomerDetails();
+        return FXCollections.observableArrayList(thogakade_modern.getAllData());
     }
 
     public void addCustomerDetails(Customer customer) {
-        service.addCustomerDetails(customer);
+        thogakade_modern.insertAnItem(customer);
         setDetailsTable();
         clearErrorMessages();
         clearTextFields();
     }
 
     public void deleteCustomerDetails(String customerId) {
-        service.deleteCustomerDetails(customerId);
+        thogakade_modern.deleteAnItem(customerId);
         setDetailsTable();
         clearErrorMessages();
         clearTextFields();
     }
 
     public void updateCustomerDetails(Customer customer) {
-        service.updateCustomerDetails(customer);
+        thogakade_modern.updateAnItem(customer);
         setDetailsTable();
         clearErrorMessages();
         clearTextFields();
