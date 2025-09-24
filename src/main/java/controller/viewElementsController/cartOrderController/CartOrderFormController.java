@@ -1,18 +1,20 @@
 package controller.viewElementsController.cartOrderController;
 
-import controller.placeOrderController.orderController.PlaceOrderControllerService;
+import controller.pages.placeOrderController.orderController.PlaceOrderControllerService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import model.dto.cart.CartItems;
 
 public class CartOrderFormController implements CartOrderFormControllerService {
 
     @FXML
     private Button decreaseOrder;
+
+    @FXML
+    private Button removeButton;
 
     @FXML
     private Button increaseOrder;
@@ -46,6 +48,21 @@ public class CartOrderFormController implements CartOrderFormControllerService {
         setCount(cartItems.getCount());
         this.service = service;
         this.cartItems = cartItems;
+    }
+
+    @Override
+    public void setData(CartItems cartItems) {
+        setTitle(cartItems.getItem().getDescription());
+        setPrice(cartItems.getItem().getUnitPrice());
+        setCount(cartItems.getCount());
+        this.cartItems = cartItems;
+    }
+
+    @Override
+    public void setItemRemovable(Boolean removable){
+        removeButton.setVisible(removable);
+        increaseOrder.setVisible(removable);
+        decreaseOrder.setVisible(removable);
     }
 
     private void setTitle(String title) {

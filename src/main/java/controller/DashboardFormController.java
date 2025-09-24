@@ -1,14 +1,11 @@
 package controller;
 
 import db.DbChecker;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -41,22 +38,22 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void onDashboardElementClicked(MouseEvent event) {
-        loadUI("/view/PlaceOrder.fxml");
+        loadUI("/view/pages/PlaceOrder.fxml");
     }
 
     @FXML
     void onOrderElementClicked(MouseEvent event) {
-
+        loadUI("/view/pages/OrderDetails.fxml");
     }
 
     @FXML
     void onInventoryElementClicked(MouseEvent event) {
-        loadUI("/view/ItemDetails.fxml");
+        loadUI("/view/pages/ItemDetails.fxml");
     }
 
     @FXML
     void onCustomersElementClicked(MouseEvent event) {
-        loadUI("/view/CustomerDetails.fxml");
+        loadUI("/view/pages/CustomerDetails.fxml");
     }
 
 
@@ -75,7 +72,7 @@ public class DashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new DbChecker().initializeDatabase();
-        loadUI("/view/PlaceOrder.fxml");
+        loadUI("/view/pages/PlaceOrder.fxml");
 
     }
 

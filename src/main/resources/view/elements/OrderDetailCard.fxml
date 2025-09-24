@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#onOrderCardClicked" prefHeight="70.0" prefWidth="1150.0" spacing="10.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewElementsController.orderCardController.OrderCardFormController">
+   <children>
+      <Label fx:id="orderIDLabel" prefHeight="48.0" prefWidth="267.0" text="OrderID" HBox.hgrow="ALWAYS" />
+      <Label fx:id="orderDateLabel" prefHeight="48.0" prefWidth="323.0" text="Order Date" HBox.hgrow="ALWAYS" />
+      <Label fx:id="customerIDLabel" prefHeight="48.0" prefWidth="311.0" text="Customer ID" />
+      <Label fx:id="totalValueLabel" prefHeight="48.0" prefWidth="186.0" text="Total" HBox.hgrow="ALWAYS" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <styleClass>
+      <String fx:value="border-thin-rectangular" />
+      <String fx:value="order-element-thin-rectangular" />
+   </styleClass>
+</HBox>

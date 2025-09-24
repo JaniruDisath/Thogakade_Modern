@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="291.0" styleClass="border-thin-rectangular" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewElementsController.cartOrderController.CartOrderFormController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="291.0" styleClass="border-thin-rectangular" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewElementsController.cartOrderController.CartOrderFormController">
    <children>
       <HBox prefHeight="20.0" prefWidth="314.0" VBox.vgrow="ALWAYS">
          <children>
@@ -31,7 +31,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <Button fx:id="decreaseOrder1" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="71.0" text="Remove" HBox.hgrow="ALWAYS">
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="71.0" text="Remove" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>

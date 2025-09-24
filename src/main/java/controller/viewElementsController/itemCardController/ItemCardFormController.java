@@ -1,6 +1,6 @@
 package controller.viewElementsController.itemCardController;
 
-import controller.placeOrderController.orderController.PlaceOrderControllerService;
+import controller.pages.placeOrderController.orderController.PlaceOrderControllerService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
