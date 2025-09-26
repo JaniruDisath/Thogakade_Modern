@@ -1,4 +1,4 @@
-package controller.pages.placeOrderController.orderController.stockItemsService;
+package services.interfaceElements.stockItems;
 
 import controller.pages.placeOrderController.formController.PlaceOrderFormController;
 import javafx.scene.layout.HBox;

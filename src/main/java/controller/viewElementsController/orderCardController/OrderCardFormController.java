@@ -1,13 +1,14 @@
 package controller.viewElementsController.orderCardController;
 
-import controller.pages.orderController.serviceController.OrderControllerService;
-import controller.pages.orderController.serviceController.orderListServices.OrderListControllerService;
+import handlers.IHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import model.Orders;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class OrderCardFormController implements OrderCardFormControllerService {
 
@@ -23,23 +24,23 @@ public class OrderCardFormController implements OrderCardFormControllerService {
     @FXML
     private Label totalValueLabel;
 
-    private OrderControllerService orderControllerService;
+    private IHandler handler;
 
     private Orders orders;
 
     @Override
-    public void setData(Orders orders, Double total, OrderControllerService orderControllerService){
+    public void setData(Orders orders, Double total, IHandler handler){
         setOrderID(orders.getOrderID());
         setOrderDate(orders.getOrderDate());
         setCustomerID(orders.getCustomerID());
         setTotalValue(total);
         this.orders=orders;
-        this.orderControllerService = orderControllerService;
+        this.handler = handler;
     }
 
     @FXML
     void onOrderCardClicked(MouseEvent event) {
-        orderControllerService.setOrderDetailsListUI(orders.getOrderID());
+        handler.onOrderCardClick(orders.getOrderID());
     }
 
 
@@ -56,10 +57,6 @@ public class OrderCardFormController implements OrderCardFormControllerService {
     }
 
     public void setTotalValue(Double totalValue) {
-        totalValueLabel.setText(String.valueOf(totalValue));
+        totalValueLabel.setText( NumberFormat.getNumberInstance(Locale.US).format(totalValue) + ".00");
     }
-
-
-
-
 }

@@ -1,9 +1,8 @@
-package controller.pages.placeOrderController.orderController.stockItemsService;
+package services.interfaceElements.stockItems;
 
 import controller.pages.placeOrderController.formController.PlaceOrderFormController;
-import controller.pages.placeOrderController.orderController.PlaceOrderControllerService;
-import controller.viewElementsController.itemCardController.ItemCardFormController;
-import db.DBConnection;
+import controller.viewElementsController.itemCardController.ItemCardFormControllerService;
+import handlers.IHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -12,18 +11,15 @@ import repository.ItemTable.ItemTable;
 import repository.Thogakade_Modern;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StockItemsController implements StockItemsControllerService {
 
-    private final PlaceOrderControllerService placeOrderControllerService;
+    private final IHandler handler;
 
-    public StockItemsController(PlaceOrderControllerService placeOrderControllerService){
-        this.placeOrderControllerService=placeOrderControllerService;
+    public StockItemsController(IHandler handler){
+        this.handler=handler;
     }
 
     //Items Row
@@ -61,8 +57,8 @@ public class StockItemsController implements StockItemsControllerService {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        ItemCardFormController controller = loader.getController();
-        controller.setData(item, placeOrderControllerService);
+        ItemCardFormControllerService controller = loader.getController();
+        controller.setData(item, handler);
         return itemCard;
     }
 
@@ -84,6 +80,7 @@ public class StockItemsController implements StockItemsControllerService {
         return thogakade_modern.getAllData();
     }
 
+    //clear the element List
     @Override
     public void clearUIItemList(){
         finalColumn.clear();

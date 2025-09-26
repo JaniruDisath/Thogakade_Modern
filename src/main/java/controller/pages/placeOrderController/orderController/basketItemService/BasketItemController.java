@@ -1,6 +1,7 @@
 package controller.pages.placeOrderController.orderController.basketItemService;
 
 import controller.viewElementsController.cartOrderController.CartOrderFormControllerService;
+import handlers.IHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import model.Item;
@@ -14,6 +15,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class BasketItemController implements BasketItemControllerService {
+
+    private final IHandler handler;
+
+    public BasketItemController(IHandler handler){
+        this.handler=handler;
+    }
 
     private final List<CartItems> cartItems = new ArrayList<>();
     private final List<CartListVBox> cartListVBoxElements = new ArrayList<>();
@@ -37,6 +44,7 @@ public class BasketItemController implements BasketItemControllerService {
             VBox itemCard = loader.load();
 
             CartOrderFormControllerService controller = loader.getController();
+            controller.setData(new CartItems(item, count),handler);
 
             addItemsToTheList(item, count, itemCard, controller);
 

@@ -1,12 +1,9 @@
 package controller.viewElementsController.orderCardController;
 
-import controller.pages.orderController.serviceController.OrderControllerService;
-import controller.pages.orderController.serviceController.orderListServices.OrderListControllerService;
+import handlers.IHandler;
 import model.Orders;
-
-import java.time.LocalDate;
 
 public interface OrderCardFormControllerService {
 
-    void setData(Orders orders, Double total, OrderControllerService orderControllerService);
+    void setData(Orders orders, Double total, IHandler handler);
 }

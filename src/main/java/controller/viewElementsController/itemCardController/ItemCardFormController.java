@@ -1,6 +1,7 @@
 package controller.viewElementsController.itemCardController;
 
 import controller.pages.placeOrderController.orderController.PlaceOrderControllerService;
+import handlers.IHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,12 +37,12 @@ public class ItemCardFormController implements ItemCardFormControllerService {
 
 
     private  Integer count = 1;
-    private  PlaceOrderControllerService service;
+    private  IHandler handler;
     private Item item;
 
-
-    public void setData(Item item, PlaceOrderControllerService service){
-        this.service =service;
+    @Override
+    public void setData(Item item, IHandler handler){
+        this.handler =handler;
         this.item=item;
         updateUIValues();
     }
@@ -83,7 +84,7 @@ public class ItemCardFormController implements ItemCardFormControllerService {
 
     @FXML
     void onAddToCart(ActionEvent event) {
-        service.addCartListElement(item, count);
+        handler.itemCardAddItem(item, count);
         count=1;
         updateTheCount();
     }

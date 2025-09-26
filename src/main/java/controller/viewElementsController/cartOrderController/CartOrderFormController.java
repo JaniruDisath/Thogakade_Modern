@@ -1,6 +1,7 @@
 package controller.viewElementsController.cartOrderController;
 
 import controller.pages.placeOrderController.orderController.PlaceOrderControllerService;
+import handlers.IHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,25 +29,25 @@ public class CartOrderFormController implements CartOrderFormControllerService {
     @FXML
     private Label titleLabel;
 
-    private PlaceOrderControllerService service;
+    private IHandler handler;
     private CartItems cartItems;
 
     @FXML
     void onDecrease(ActionEvent event) {
-        service.addCartListElement(cartItems.getItem(), -1);
+        handler.itemCardAddItem(cartItems.getItem(), -1);
     }
 
     @FXML
     void onIncrease(ActionEvent event) {
-        service.addCartListElement(cartItems.getItem(), 1);
+        handler.itemCardAddItem(cartItems.getItem(), 1);
     }
 
     @Override
-    public void setData(CartItems cartItems, PlaceOrderControllerService service) {
+    public void setData(CartItems cartItems, IHandler handler) {
         setTitle(cartItems.getItem().getDescription());
         setPrice(cartItems.getItem().getUnitPrice());
         setCount(cartItems.getCount());
-        this.service = service;
+        this.handler = handler;
         this.cartItems = cartItems;
     }
 
@@ -86,7 +87,7 @@ public class CartOrderFormController implements CartOrderFormControllerService {
 
     @FXML
     void onDeleteItem(ActionEvent event) {
-        service.removeAnItem(cartItems.getItem());
+        handler.basketItemRemove(cartItems.getItem());
     }
 
 

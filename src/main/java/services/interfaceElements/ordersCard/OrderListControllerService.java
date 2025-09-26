@@ -1,4 +1,4 @@
-package controller.pages.orderController.serviceController.orderListServices;
+package services.interfaceElements.ordersCard;
 
 import javafx.scene.layout.HBox;
 

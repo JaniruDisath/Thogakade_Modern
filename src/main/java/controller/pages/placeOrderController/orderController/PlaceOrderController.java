@@ -4,8 +4,10 @@ import controller.pages.placeOrderController.formController.PlaceOrderFormContro
 import controller.pages.placeOrderController.formController.PlaceOrderFormControllerService;
 import controller.pages.placeOrderController.orderController.basketItemService.BasketItemController;
 import controller.pages.placeOrderController.orderController.basketItemService.BasketItemControllerService;
-import controller.pages.placeOrderController.orderController.stockItemsService.StockItemsController;
-import controller.pages.placeOrderController.orderController.stockItemsService.StockItemsControllerService;
+import services.interfaceElements.stockItems.StockItemsController;
+import services.interfaceElements.stockItems.StockItemsControllerService;
+import handlers.IHandler;
+import handlers.pages.PlaceOrderControllerHandler;
 import javafx.scene.layout.HBox;
 import model.Item;
 import model.dto.cart.CartItems;
@@ -17,15 +19,20 @@ import java.util.List;
 public class PlaceOrderController implements PlaceOrderControllerService {
 
     private PlaceOrderFormControllerService ui ;
+    //Handler - UI Handler
+    private IHandler handler = new PlaceOrderControllerHandler(this);
+    //Services - Interface Elements - Stock Items Service
     private final StockItemsControllerService stockItemsControllerService;
     private final BasketItemControllerService basketItemControllerService;
 
 
 
+
     public PlaceOrderController(PlaceOrderFormControllerService ui) {
         this.ui = ui;
-        this.stockItemsControllerService = new StockItemsController(this);
-        this.basketItemControllerService = new BasketItemController();
+        this.handler = new PlaceOrderControllerHandler(this);
+        this.stockItemsControllerService = new StockItemsController(handler);
+        this.basketItemControllerService = new BasketItemController(handler);
 
     }
 
@@ -43,14 +50,14 @@ public class PlaceOrderController implements PlaceOrderControllerService {
     public void addCartListElement(Item item, Integer count) {
         basketItemControllerService.addCartListElement(item,count);
         ui.updateCartUIValues();
-        setBasketItemController();
+//        setBasketItemController();
     }
 
-    public void setBasketItemController(){
-        for (int i = 0; i <getCartListElements().size() ; i++) {
-            getCartListElements().get(i).getControllerService().setData(basketItemControllerService.getCartItems().get(i), this);
-        }
-    }
+//    public void setBasketItemController(){
+//        for (int i = 0; i <getCartListElements().size() ; i++) {
+//            getCartListElements().get(i).getControllerService();
+//        }
+//    }
 
     @Override
     public List<CartListVBox> getCartListElements() {

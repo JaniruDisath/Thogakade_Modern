@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import model.dto.cart.CartListVBox;
 
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable,OrderFormControllerService {
@@ -29,6 +31,11 @@ public class OrderFormController implements Initializable,OrderFormControllerSer
     @FXML
     void onChangeOrder(ActionEvent event) {
 
+    }
+
+    @Override
+    public void setTotalValue(Double totalValue){
+        totalLabel.setText( NumberFormat.getNumberInstance(Locale.US).format(totalValue) + ".00");
     }
 
     @Override
