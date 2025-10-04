@@ -41,12 +41,13 @@ public class OrderController implements OrderControllerService {
     private ICalculations calculations = new Calculations();
 
 
-
+    //Service - Get Order Card Elements List
     @Override
     public List<HBox> getOrderCardList() {
         return orderListService.getOrderCardList();
     }
 
+    //Setting the order items list
     @Override
     public void setOrderDetailsListUI(String orderID) {
         basketItemerService.resetList();
@@ -55,12 +56,14 @@ public class OrderController implements OrderControllerService {
         orderFormService.refreshElements();
     }
 
+    //Loading the items
     private void loadTheBasketItems(List<OrderDetails> selectedOrders) {
         for (int i = 0; i < selectedOrders.size(); i++) {
             basketItemerService.addCartListElement(itemTableServices.findItem(selectedOrders.get(i).getItemCode()), selectedOrders.get(i).getOrderQty());
         }
         setBasketItemController();
     }
+
 
 
     public void setBasketItemController() {
@@ -71,6 +74,7 @@ public class OrderController implements OrderControllerService {
     }
 
 
+    //Service - Getting the UI elements for the items in the order
     @Override
     public List<CartListVBox> getCartListElements() {
         return basketItemerService.getCartListElements();
